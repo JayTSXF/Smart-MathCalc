@@ -14,9 +14,12 @@
         <div id="button-grid"></div>
       </div>
     </div>
-    <div id="mathcalc-reminder" class="reminder" style="display: none;">
-      🧮 Need help with math? Click here!
+  <div id="mathcalc-reminder" class="reminder" style="display: none;">
+    <div class="reminder-inner">
+      <span class="reminder-text">🧮 Need help with math?</span>
+      <span class="reminder-close" id="reminder-close">✕</span>
     </div>
+  </div>
   `;
   document.body.appendChild(container);
 
@@ -27,22 +30,44 @@
 
   initCalculator();
 
+  document.getElementById('reminder-close').onclick = (event) => {
+    event.stopPropagation();
+    document.getElementById('mathcalc-reminder').style.display = 'none';
+  };
+
+  makeDraggable(document.getElementById('mathcalc-reminder'), '.reminder-inner');
+
   document.getElementById('popup-close').onclick = () => {
     document.getElementById('mathcalc-popup').style.display = 'none';
   };
 
   document.getElementById('mathcalc-reminder').onclick = () => {
+    const reminder = document.getElementById('mathcalc-reminder');
+    if (reminder.dataset.wasDragged === "true") {
+      reminder.dataset.wasDragged = "false";
+      console.log("[DEBUG] Reminder was dragged, skipping popup this time.");
+      return;
+    }
     document.getElementById('mathcalc-popup').style.display = 'block';
   };
 
   makeDraggable(document.getElementById('mathcalc-popup'));
 
-  setInterval(detectMathContent, 2000);
+  detectMathContent();
+
+  const observer = new MutationObserver((mutationsList, observer) => {
+    detectMathContent();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    characterData: true
+  });
 })();
 
-// 检测页面中是否有数学表达式
 function detectMathContent() {
-  const mathRegex = /[0-9]+\s*[+\-×÷*/^=]\s*[0-9]+|∫|√|lim|dx|=|f\([a-z]\)|\b(sin|cos|tan|log|ln)\b/i;
+  const mathRegex = /\d[+\-×÷*/^=√]\d|\d√[a-zA-Z]|\d\(|∫|lim|d\/dx|f\([a-z]\)/i;
   const blocks = Array.from(document.querySelectorAll('p, span, div, code, h1, h2, h3')).map(n => n.innerText || '').filter(Boolean);
   const found = blocks.some(t => mathRegex.test(t));
   const reminder = document.getElementById('mathcalc-reminder');
@@ -51,7 +76,6 @@ function detectMathContent() {
   }
 }
 
-// 初始化计算器按钮
 function initCalculator() {
   const buttons = [
     "Rad", "Deg", "!", "(", ")", "%", "AC",
@@ -71,7 +95,6 @@ function initCalculator() {
   });
 }
 
-// 输入逻辑处理
 function handleInput(label) {
   const input = document.getElementById('calc-input');
 
@@ -91,32 +114,59 @@ function handleInput(label) {
   }
 }
 
-// 拖动计算器窗口
-function makeDraggable(elmnt) {
+function makeDraggable(elmnt, dragSelector) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  const header = elmnt.querySelector('.popup-header');
-  if (!header) return;
+  let isDragging = false;
+  let startX = 0, startY = 0;
+
+  const header = dragSelector
+    ? elmnt.querySelector(dragSelector)
+    : elmnt.querySelector('.popup-header') || elmnt;
+
   header.onmousedown = dragMouseDown;
+
   function dragMouseDown(e) {
     e.preventDefault();
-    pos3 = e.clientX; pos4 = e.clientY;
+    startX = e.clientX;
+    startY = e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    isDragging = false;
+
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
+
   function elementDrag(e) {
     e.preventDefault();
-    pos1 = pos3 - e.clientX; pos2 = pos4 - e.clientY;
-    pos3 = e.clientX; pos4 = e.clientY;
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+      isDragging = true;
+    }
+
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+
+    let newTop = elmnt.offsetTop - pos2;
+    let newLeft = elmnt.offsetLeft - pos1;
+
+    newTop = Math.max(0, Math.min(window.innerHeight - elmnt.offsetHeight, newTop));
+    newLeft = Math.max(0, Math.min(window.innerWidth - elmnt.offsetWidth, newLeft));
+
+    elmnt.style.top = newTop + "px";
+    elmnt.style.left = newLeft + "px";
   }
+
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
+    elmnt.dataset.wasDragged = isDragging ? "true" : "false";
   }
 }
 
-// 调用 WolframAlpha Short Answer API
 async function evaluateExpression(query) {
   const appid = "EVEKW57V7X";
   const encoded = encodeURIComponent(query);
