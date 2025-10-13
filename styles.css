@@ -1,105 +1,307 @@
-.reminder {
+.smc-reminder {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #fffae6;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 10px 14px;
-  border-radius: 6px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 50px;
   cursor: move;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
   z-index: 10000;
-  font-family: Arial, sans-serif;
-  width: fit-content;
-  height: fit-content;
-  resize: none;
-  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   user-select: none;
-}
-
-.reminder-inner {
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
+}
+
+.smc-reminder:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+}
+
+.smc-reminder-inner {
+  display: flex;
+  align-items: center;
   gap: 10px;
 }
 
-.reminder-text {
+.smc-reminder-icon {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.smc-reminder-text {
   cursor: pointer;
   white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
 }
 
-.reminder-close {
+.smc-reminder-close {
   cursor: pointer;
   font-weight: bold;
-  color: #666;
-  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 18px;
+  padding: 0 6px;
+  margin-left: 4px;
+  transition: all 0.2s;
   line-height: 1;
-  display: inline-block;
 }
 
-.popup {
+.smc-reminder-close:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+/* Popup */
+.smc-popup {
   position: fixed;
-  top: 100px;
-  left: 100px;
-  width: 520px;
-  background-color: white;
-  border: 2px solid #ccc;
-  border-radius: 8px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  max-width: 95vw;
+  max-height: 90vh;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 16px;
   z-index: 10001;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  font-family: Arial, sans-serif;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.popup-header {
-  padding: 10px;
-  background-color: #f6f6f6;
+.smc-popup-header {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
   cursor: move;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #ddd;
+  align-items: center;
+  user-select: none;
 }
 
-.popup-title {
-  font-weight: bold;
+.smc-popup-title {
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.popup-close {
+.smc-popup-close {
   cursor: pointer;
+  font-size: 24px;
+  color: white;
+  padding: 0 8px;
+  transition: transform 0.2s;
+  line-height: 1;
 }
 
-.popup-body {
-  padding: 10px;
+.smc-popup-close:hover {
+  transform: scale(1.2) rotate(90deg);
 }
 
-#calc-input {
-  width: 100%;
-  padding: 6px;
-  margin-bottom: 10px;
-  font-size: 16px;
+.smc-popup-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+  background-color: #f9fafb;
 }
 
-#button-grid {
+/* Input/Output */
+.smc-input-output-container {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  justify-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.calc-btn {
-  width: 60px;
-  height: 40px;
+.smc-input-section,
+.smc-output-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.smc-input-section label,
+.smc-output-section label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+#smc-calc-input,
+#smc-calc-output {
+  width: 100%;
+  padding: 12px;
+  font-size: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  transition: all 0.2s;
+  resize: vertical;
+  min-height: 80px;
+}
+
+#smc-calc-input {
+  background-color: #fff;
+}
+
+#smc-calc-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#smc-calc-output {
+  background-color: #f0fdf4;
+  color: #059669;
+  font-weight: 600;
+  cursor: default;
+  border-color: #d1fae5;
+}
+
+/* Button Grid */
+#smc-button-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.smc-calc-btn {
+  min-height: 48px;
+  padding: 10px 8px;
   font-size: 14px;
   background-color: #ffffff;
-  color: #000000;
-  border: 2px solid #000000;
-  border-radius: 6px;
+  color: #1f2937;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-transform: none !important;
+  transition: all 0.15s ease;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-wrap: break-word;
+  white-space: pre-line;
 }
 
-.calc-btn:hover {
-  background-color: #f0f0f0;
+.smc-calc-btn:hover {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.smc-calc-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 等号按钮 - 居中且特殊样式 */
+.smc-calc-btn-centered {
+  grid-column: 4 / 6; /* 占据第4和第5列，实现居中 */
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #10b981;
+  font-size: 20px;
+  font-weight: 700;
+  min-height: 56px;
+}
+
+.smc-calc-btn-centered:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+}
+
+/* Quick Help */
+.smc-quick-help {
+  text-align: center;
+  color: #6b7280;
+  padding: 12px;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border-radius: 8px;
+  border: 2px solid #fbbf24;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Scrollbar */
+.smc-popup-body::-webkit-scrollbar {
+  width: 10px;
+}
+
+.smc-popup-body::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 10px;
+}
+
+.smc-popup-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+.smc-popup-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #764ba2, #667eea);
+}
+
+/* Tooltip 样式增强 */
+.smc-calc-btn[title] {
+  position: relative;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .smc-popup {
+    width: 95vw;
+    height: 90vh;
+  }
+  
+  .smc-input-output-container {
+    grid-template-columns: 1fr;
+  }
+  
+  #smc-button-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+  }
+  
+  .smc-calc-btn {
+    min-height: 44px;
+    font-size: 12px;
+    padding: 8px 4px;
+  }
+  
+  .smc-calc-btn-centered {
+    grid-column: 3 / 5;
+  }
+}
+
+@media (max-width: 600px) {
+  #smc-button-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .smc-calc-btn-centered {
+    grid-column: 2 / 4;
+  }
 }
