@@ -1,4 +1,6 @@
-.reminder {
+/* Smart MathCalc Styles - using smc- prefix to avoid conflicts */
+
+.smc-reminder {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -18,19 +20,19 @@
   user-select: none;
 }
 
-.reminder-inner {
+.smc-reminder-inner {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   gap: 10px;
 }
 
-.reminder-text {
+.smc-reminder-text {
   cursor: pointer;
   white-space: nowrap;
 }
 
-.reminder-close {
+.smc-reminder-close {
   cursor: pointer;
   font-weight: bold;
   color: #666;
@@ -39,7 +41,7 @@
   display: inline-block;
 }
 
-.popup {
+.smc-popup {
   position: fixed;
   top: 100px;
   left: 100px;
@@ -52,7 +54,7 @@
   font-family: Arial, sans-serif;
 }
 
-.popup-header {
+.smc-popup-header {
   padding: 10px;
   background-color: #f6f6f6;
   cursor: move;
@@ -61,33 +63,48 @@
   border-bottom: 1px solid #ddd;
 }
 
-.popup-title {
+.smc-popup-title {
   font-weight: bold;
 }
 
-.popup-close {
+.smc-popup-close {
   cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  transition: color 0.2s;
 }
 
-.popup-body {
+.smc-popup-close:hover {
+  color: #333;
+}
+
+.smc-popup-body {
   padding: 10px;
 }
 
-#calc-input {
+.smc-calc-input {
   width: 100%;
-  padding: 6px;
+  padding: 8px;
   margin-bottom: 10px;
   font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-#button-grid {
+.smc-calc-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.smc-button-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
   justify-items: center;
 }
 
-.calc-btn {
+.smc-calc-btn {
   width: 60px;
   height: 40px;
   font-size: 14px;
@@ -100,6 +117,10 @@
   text-transform: none !important;
 }
 
-.calc-btn:hover {
+.smc-calc-btn:hover {
   background-color: #f0f0f0;
+}
+
+.smc-calc-btn:active {
+  background-color: #e0e0e0;
 }

@@ -6,7 +6,7 @@
   "icons": {
     "128": "icon.png"
   },
-  "permissions": [],
+  "permissions": ["storage"],
   "action": {
     "default_icon": "icon.png"
   },
