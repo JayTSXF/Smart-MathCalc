@@ -1,4 +1,4 @@
-# 📐 Smart MathCalc
+# 🧮 Smart MathCalc
 
 A powerful Chrome extension that automatically detects math content on webpages and provides a floating calculator with comprehensive mathematical computation powered by WolframAlpha.
 
@@ -8,8 +8,8 @@ A powerful Chrome extension that automatically detects math content on webpages 
 
 ### 🎯 Smart Detection
 - Automatically scans webpages for mathematical expressions, equations, and formulas
-- Shows a floating reminder when math content is detected
-- Non-intrusive and remembers your preferences
+- Shows a floating calculator when math content is detected
+- Remembers if you close it and won't show again on that page
 
 ### 🧮 Comprehensive Calculator
 
@@ -17,26 +17,35 @@ A powerful Chrome extension that automatically detects math content on webpages 
 - Arithmetic: `+`, `−`, `×`, `÷`, `^` (powers)
 - Functions: `sin`, `cos`, `tan`, `ln`, `log`, `sqrt`, `abs`
 - Constants: `π`, `e`, `i`, `∞`
+- Factorial: `!`
 
 **Calculus**
 - Derivatives: `d/dx`, `d²/dx²`
-- Integrals: `∫`, `∫∫`, `∫∫∫`
+- Integrals: `∫`
 - Limits: `lim`
-- Partial derivatives: `∂/∂x`, `∂/∂y`, `∂/∂z`
-- Vector calculus: `grad`, `div`, `curl`
-- Special: `taylor` series, `laplace` transforms
+- Partial derivatives: `∂x`, `∂y`
+- Taylor series: `taylor`
 
 **Linear Algebra**
-- Matrix operations: `det`, `inv`, `transpose`, `trace`, `rank`, `rref`, `diag`
+- Matrix operations: `det`, `inv`, `transpose`, `rank`, `rref`
 - Eigenvalues & eigenvectors: `eigenval`, `eigenvec`
 - Vector operations: `dot`, `cross`, `norm`
 - Create matrices: `{{1,2},{3,4}}` and vectors: `{1,2,3}`
 
+**Algebra**
+- Solve equations: `solve`
+- Expand expressions: `expand`
+- Factor polynomials: `factor`
+- Summation: `Σ`
+
 ### 💡 User-Friendly
 - **Draggable interface**: Move the calculator anywhere on screen
+- **Minimizable**: Click ✕ to minimize, click header to restore
+- **Copy buttons**: Quickly copy input or results to clipboard
 - **Detailed tooltips**: Hover over buttons for usage examples
+- **Keyboard support**: Type expressions directly
 - **Previous answer**: Use `Ans` button to reuse results
-- **Clean layout**: Organized 8-column grid with all functions
+- **Smart operations**: Buttons adapt based on your input
 
 ---
 
@@ -56,33 +65,66 @@ A powerful Chrome extension that automatically detects math content on webpages 
 ```
 Input: 2^10
 Output: 1024
+
+Input: sqrt(16)
+Output: 4
+
+Input: 5!
+Output: 120
 ```
 
 ### Calculus
 ```
-Input: derivative of x^2 with respect to x
+Input: derivative of x^2
 Output: 2x
 
-Input: integrate sin(x) dx from 0 to π
-Output: 2
+Input: integral of 2x
+Output: x^2
+
+Input: limit of sin(x)/x as x approaches 0
+Output: 1
+
+Input: taylor series sin(x)
+Output: x - x^3/6 + x^5/120 - ...
 ```
 
 ### Linear Algebra
 ```
-Input: determinant of {{1,2},{3,4}}
+Input: determinant {{1,2},{3,4}}
 Output: -2
 
-Input: eigenvalues of {{3,1},{1,3}}
-Output: {4, 2}
+Input: eigenvalues {{1,2},{3,4}}
+Output: [5.372, -0.372]
+
+Input: inverse {{2,1},{1,2}}
+Output: {{0.667,-0.333},{-0.333,0.667}}
+
+Input: rank {{1,2},{2,4}}
+Output: 1
 ```
 
 ### Vector Operations
 ```
-Input: {1,2,3} dot {4,5,6}
+Input: {1,2,3} . {4,5,6}
 Output: 32
 
-Input: gradient of x^2+y^2+z^2
-Output: {2x, 2y, 2z}
+Input: {1,0,0} x {0,1,0}
+Output: {0,0,1}
+
+Input: norm {3,4}
+Output: 5
+```
+
+### Algebra
+```
+Input: expand (x+1)^2
+Output: x^2 + 2x + 1
+
+Input: factor x^2 - 1
+Output: (x-1)(x+1)
+
+Input: solve x^2 + 2x + 1 = 0
+Output: x = -1
 ```
 
 ---
@@ -90,15 +132,34 @@ Output: {2x, 2y, 2z}
 ## 💡 Tips
 
 - **Hover over any button** to see detailed usage examples
-- Click the **🧮 reminder** to open the calculator
-- Use **natural language** for complex expressions
-- The **= button** sends your expression to WolframAlpha
+- The calculator **automatically appears** on pages with math content
+- Click **✕ once** to minimize, **✕ again** to close completely
+- Click the **header** when minimized to restore the calculator
+- Use **natural language** for complex expressions (e.g., "derivative of x^2")
+- The **= button** sends your expression to WolframAlpha for computation
+- Use **copy buttons** (📋) in input/output areas to quickly copy text
+- **Drag the header** to move the calculator anywhere on screen
+- Press **C** to clear last character, **AC** to clear all
+
+---
+
+## 🐛 Troubleshooting
+
+**Calculator not appearing?**
+- Make sure the page contains mathematical content
+- Try refreshing the page
+- Check if extension is enabled in `chrome://extensions/`
+
+**Getting an error?**
+- Try rephrasing your expression in plain English
+- Check the button tooltips for correct syntax
+- Simplify complex expressions into smaller parts
 
 ---
 
 ## 📄 License
 
-MIT License - see [LICENSE]([LICENSE](https://jaytsxf.github.io/Smart-MathCalc/)) file for details
+MIT License - see [LICENSE](https://jaytsxf.github.io/Smart-MathCalc/privacy-policy.html) file for details
 
 ---
 
