@@ -3,17 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart MathCalc</title>
+    <title>Smart MathCalc - Chrome Extension</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            padding: 80px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 56px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        header .subtitle {
+            font-size: 20px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            width: 100%;
+        }
+        
+        .feature {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+        }
+        
+        .feature .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        .feature h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #000000;
+            font-weight: 600;
+        }
+        
+        .feature p {
+            color: #666666;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .cta-section {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+        
+        .cta-section p {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #ffffff;
+            padding: 16px 48px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+        }
+        
+        .cta-button:active {
+            transform: translateY(0);
+        }
+        
+        footer {
+            background: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #333333;
+        }
+        
+        footer p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.7;
+        }
+        
+        .links-divider {
+            margin: 0 8px;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 40px;
+            }
+            
+            header .subtitle {
+                font-size: 16px;
+            }
+            
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .features {
+                gap: 20px;
+            }
+            
+            .feature {
+                padding: 30px;
+            }
+            
+            .cta-section h2 {
+                font-size: 28px;
+            }
+            
+            .cta-button {
+                padding: 14px 40px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to Smart MathCalc</h1>
-        <p>Your go-to solution for advanced math calculations and problem-solving.</p>
+        <h1>🧮 Smart MathCalc</h1>
+        <p class="subtitle">Your intelligent floating calculator for advanced mathematics</p>
     </header>
-    <main>
-        <h2>About Smart MathCalc</h2>
-        <p>Smart MathCalc is an innovative Chrome extension that simplifies complex calculations for students and professionals alike.</p>
-        <a href="https://chrome.google.com/webstore/detail/smart-mathcalc" target="_blank">Get it on the Chrome Web Store</a>
-    </main>
+    
+    <div class="container">
+        <div class="features">
+            <div class="feature">
+                <div class="icon">🎯</div>
+                <h3>Smart Detection</h3>
+                <p>Automatically detects math expressions on any webpage and shows a floating calculator</p>
+            </div>
+            
+            <div class="feature">
+                <div class="icon">🧮</div>
+                <h3>Comprehensive</h3>
+                <p>Algebra, calculus, linear algebra, and scientific calculations powered by WolframAlpha</p>
+            </div>
+            
+            <div class="feature">
+                <div class="icon">⚡</div>
+                <h3>Intuitive Design</h3>
+                <p>Drag, minimize, copy results - designed for students and professionals</p>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Ready to calculate?</h2>
+            <p>Get Smart MathCalc from the Chrome Web Store</p>
+            <a href="https://chrome.google.com/webstore/detail/smart-mathcalc" class="cta-button" target="_blank">Install Now</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Made with ❤️ for students, engineers, and math enthusiasts</p>
+        <p>
+            <a href="https://github.com/JayTSXF/Smart-MathCalc" target="_blank">GitHub</a>
+            <span class="links-divider">•</span>
+            <a href="https://github.com/JayTSXF/Smart-MathCalc/blob/main/README.md" target="_blank">Documentation</a>
+            <span class="links-divider">•</span>
+            <a href="https://github.com/JayTSXF/Smart-MathCalc/issues" target="_blank">Support</a>
+        </p>
+    </footer>
 </body>
 </html>
