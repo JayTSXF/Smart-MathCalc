@@ -19,6 +19,12 @@ A powerful Chrome extension that automatically detects math content on webpages 
 - Constants: `π`, `e`, `i`, `∞`
 - Factorial: `!`
 
+**Algebra**
+- Solve equations: `solve`
+- Expand expressions: `expand`
+- Factor polynomials: `factor`
+- Summation: `Σ`
+- 
 **Calculus**
 - Derivatives: `d/dx`, `d²/dx²`
 - Integrals: `∫`
@@ -31,12 +37,6 @@ A powerful Chrome extension that automatically detects math content on webpages 
 - Eigenvalues & eigenvectors: `eigenval`, `eigenvec`
 - Vector operations: `dot`, `cross`, `norm`
 - Create matrices: `{{1,2},{3,4}}` and vectors: `{1,2,3}`
-
-**Algebra**
-- Solve equations: `solve`
-- Expand expressions: `expand`
-- Factor polynomials: `factor`
-- Summation: `Σ`
 
 ### 💡 User-Friendly
 - **Draggable interface**: Move the calculator anywhere on screen
@@ -73,6 +73,18 @@ Input: 5!
 Output: 120
 ```
 
+### Algebra
+```
+Input: expand (x+1)^2
+Output: x^2 + 2x + 1
+
+Input: factor x^2 - 1
+Output: (x-1)(x+1)
+
+Input: solve x^2 + 2x + 1 = 0
+Output: x = -1
+```
+
 ### Calculus
 ```
 Input: derivative of x^2
@@ -90,6 +102,15 @@ Output: x - x^3/6 + x^5/120 - ...
 
 ### Linear Algebra
 ```
+Input: {1,2,3} . {4,5,6}
+Output: 32
+
+Input: {1,0,0} x {0,1,0}
+Output: {0,0,1}
+
+Input: norm {3,4}
+Output: 5
+
 Input: determinant {{1,2},{3,4}}
 Output: -2
 
@@ -101,30 +122,6 @@ Output: {{0.667,-0.333},{-0.333,0.667}}
 
 Input: rank {{1,2},{2,4}}
 Output: 1
-```
-
-### Vector Operations
-```
-Input: {1,2,3} . {4,5,6}
-Output: 32
-
-Input: {1,0,0} x {0,1,0}
-Output: {0,0,1}
-
-Input: norm {3,4}
-Output: 5
-```
-
-### Algebra
-```
-Input: expand (x+1)^2
-Output: x^2 + 2x + 1
-
-Input: factor x^2 - 1
-Output: (x-1)(x+1)
-
-Input: solve x^2 + 2x + 1 = 0
-Output: x = -1
 ```
 
 ---
